@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 作業 2</title>
+</head>
+
+<body>
+    <form action="./02orangeSwitch.php" method="post" style="display: inline-block;">
+        <table>
+            <tr>
+                <td>等級：</td>
+                <td>
+                    <input class="input" type="text" name="level">
+                </td>
+            </tr>
+            <tr>
+                <td>公斤：</td>
+                <td>
+                    <input class="input" type="text" name="kg">
+                </td>
+            </tr>
+        </table>
+        <div style="text-align: center;">
+            <input type="submit" value="新增">
+            <button type="button" id="btn">重新設定</button>
+        </div>
+    </form>
+    <script>
+        
+        window.addEventListener("load", () => {
+
+            const btn = document.getElementById("btn");
+
+            btn.addEventListener("click", () => {
+
+                const int = document.querySelectorAll(".input");
+
+                for(let i in int){
+
+                    int[i].value = "";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
