@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 作業 2</title>
+</head>
+
+<body>
+    <form action="./02orangeSwitch.php" method="post" style="display: inline-block;">
+        <table>
+            <tr>
+                <td>等級：</td>
+                <td>
+                    <input id="level" class="input" type="text" name="level">
+                </td>
+            </tr>
+            <tr>
+                <td>公斤：</td>
+                <td>
+                    <input id="kg" class="input" type="text" name="kg">
+                </td>
+            </tr>
+        </table>
+        <div style="text-align: center;">
+            <!-- <input type="submit" id="submit" value="新增"> -->
+            <button type="button" id="submit">計算</button>
+            <button type="button" id="resetBtn">重新設定</button>
+        </div>
+    </form>
+    <div id="showTotal"></div>
+    <script>
+        
+        window.addEventListener("load", () => {
+
+            const resetBtn = document.getElementById("resetBtn");
+            const submit = document.getElementById("submit");
+
+            submit.addEventListener("click", () => {
+
+                // e.preventDefault();
+
+                const xmlhttp = new XMLHttpRequest();
+                const level = document.getElementById("level").value;
+                const kg = document.getElementById("kg").value;
+                const str = "level=" + level + "&kg=" + kg;
+
+                xmlhttp.open("POST", "./02orangeSwitch.php", true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.send(str);
+
+                xmlhttp.onreadystatechange = () => {
+
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+
+                        document.getElementById("showTotal").innerHTML = xmlhttp.responseText;
+                    }
+                };
+            });
+
+            resetBtn.addEventListener("click", () => {
+
+                const int = document.querySelectorAll(".input");
+
+                for(let i in int){
+
+                    int[i].value = "";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
